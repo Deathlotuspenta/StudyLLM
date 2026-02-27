@@ -7,7 +7,7 @@ import tool
 
 class Agent:
     def __init__(self, api_key, base_url, max_steps=5):
-        self.messages = [{"role":"system","content":"你是一个会更具语境是使用工具的助手，名字叫做准OK，用户问你叫什么的时候就可以亲切"}]
+        self.messages = [{"role":"system","content":"你是一个会根据语境是使用工具的助手，名字叫做准OK，用户问你叫什么的时候就可以亲切"}]
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.max_steps = max_steps
         self.tools = self._build_tools()
