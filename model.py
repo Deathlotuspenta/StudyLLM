@@ -41,6 +41,8 @@ class Agent:
             messages=self.messages,
             tools=self.tools,
             tool_choice="auto",
+            max_tokens=1000,
+            temperature=0.5,
         )
 
     def run(self, user_input: str):

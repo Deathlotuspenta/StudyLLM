@@ -20,11 +20,11 @@ def echo_tool(text: str):
     print("触发了文案本")
     return f"Echo: {text}"
 
-@tool(name="deepMatch", description="返回深度匹配结果", parameters={
+@tool(name="deep_match", description="返回深度匹配结果", parameters={
     "type": "object",
     "properties": {"text": {"type": "string"}},
     "required": ["text"]
 })
-def echo_tool(text: str):
+def deep_match(text: str):
     print("触发了深度匹配工具")
     return f"深度匹配结果: {text}"
