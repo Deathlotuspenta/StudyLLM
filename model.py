@@ -1,12 +1,20 @@
+import os
 from openai import OpenAI
 import json
 
 import all_tool
 import message
 import tool 
+from dotenv import load_env_file
 
 class Agent:
-    def __init__(self, api_key, base_url, max_steps=5):
+    def __init__(self, api_key=None, base_url=None, max_steps=5):
+        load_env_file()
+        api_key = api_key or os.getenv("APIKEY")
+        base_url = base_url or os.getenv("BASE_URL")
+        if not api_key or not base_url:
+            raise ValueError("缺少 APIKEY 或 BASE_URL，请检查 .env 配置")
+
         self.messages = [{"role":"system","content":"你是一个会根据语境是使用工具的助手，名字叫做准OK，用户问你叫什么的时候就可以亲切"}]
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.max_steps = max_steps
@@ -97,10 +105,7 @@ class Agent:
         return "达到最大调用步数，未完成。"
 
 if __name__ == "__main__":
-    agent = Agent(
-        api_key="sk-7a47752ca37c4e0aa1d59ce523d5312a",
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
-    )
+    agent = Agent()
 
     while True:
         user_input = input("你: ")
